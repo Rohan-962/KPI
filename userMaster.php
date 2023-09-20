@@ -29,6 +29,8 @@ if (isset($_POST['user_idEdit'])) {
   $user_password = $_POST["user_passwordEdit"];
 }
 if (isset($_POST['add'])) {
+
+  header("Location: userMaster.php");
   $name = $_POST['user_name'];
   $user_role = $_POST['user_role'];
   $user_mail = $_POST['user_mail'];
@@ -37,8 +39,8 @@ if (isset($_POST['add'])) {
   $user_password = $_POST["user_password"];
 
   // SQL query to be executed
-  $sql = "INSERT INTO `kpi`.`tbl_user_master`(`user_name`, `user_role`, `user_mail`, `user_type`, `team_id`,
-        `user_password`) VALUES ('$name','$user_role','$user_mail','$user_type','$team_id',
+  $sql = "INSERT INTO `kpi`.`tbl_user_master`(`emp_name`, `role`, `email`, `emp_type`, `team_id`,
+        `password`) VALUES ('$name','$user_role','$user_mail','$user_type','$team_id',
         '$user_password');";
 
   if ($con->query($sql) == true) {
@@ -48,7 +50,7 @@ if (isset($_POST['add'])) {
     echo "Error : $sql <br> $con->error";
   }
 
-  $con->close();
+ 
 }
 ?>
 
@@ -190,6 +192,7 @@ if ($insert == true) {
     </table>
 
   </div>
+  <?php $con->close(); ?>
   </body>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

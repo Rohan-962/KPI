@@ -93,9 +93,8 @@
                     <td><?php echo $output["team_name"];?></td>
                     <td><?php echo $output["kpi_month"];?></td>
                     <td><?php echo $output["kpi_year"];?></td>
-                    <td><input type="text" id="actual_score" name="actual_score">
-                       
-                    </td>                                          
+                    <td><input type="tel" id="actual_score" name="actual_score">
+                </td>                                          
                     <!-- <td><input type="text" id="met_not_met" name="met_not_met"><br><br></td> -->
                     <td>
                     <select id="met_not_met" name="met_not_met">
