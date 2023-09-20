@@ -93,14 +93,15 @@
                     <td><?php echo $output["team_name"];?></td>
                     <td><?php echo $output["kpi_month"];?></td>
                     <td><?php echo $output["kpi_year"];?></td>
-                    <td><input type="tel" id="actual_score" name="actual_score">
+                    <td><input type="number" id="actual_score" name="actual_score" onkeyup="myFunction(this)">
                 </td>                                          
                     <!-- <td><input type="text" id="met_not_met" name="met_not_met"><br><br></td> -->
                     <td>
-                    <select id="met_not_met" name="met_not_met">
+                        <input type="text" id="met-not-met" readonly>
+                    <!-- <select id="met_not_met" name="met_not_met">
                         <option value = "met" selected>Met</option>
                         <option value = "not-met">Not-Met</option>
-                    </select>
+                    </select> -->
                     </td>
                     <td><input type="text" id="root_cause" name="root_cause"></td>                    
                     <td><input type="text" id="corrective_action" name="corrective_action"></td>
@@ -124,11 +125,15 @@
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
-    $('#master_table').DataTable( {
-        "scrollY": 200,
-        "scrollX": true
+        $('#master_table').DataTable( {
+            "scrollY": 200,
+            "scrollX": true
+        } );
     } );
-} );
+
+    function myFunction(e){
+        console.log(e)
+    }
 </script>
 </html>
 
