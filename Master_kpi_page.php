@@ -45,14 +45,14 @@
     
     <!-- <input type="text" name="username" value="<?php echo $_SESSION['user_id']; ?> "/> -->
          
-        <br><br>
+        
         <?php
-            session_start();
+            session_start();    
             // $user_id =  $_COOKIE['user_id'];
             
             // try{
 
-                $sql_fetch = "SELECT tbl_kpi_master.kpi_id,tbl_kpi_master.kpi_name, tbl_kpi_master.team_name, tbl_kpi_master.target_type, tbl_kpi_master.target, tbl_team_master.team_name, tbl_kpi_master.kpi_month, tbl_kpi_master.kpi_year, tbl_kpi_master.actual, tbl_kpi_master.tat_status, tbl_kpi_master.root_cause, tbl_kpi_master.corrective_action, tbl_kpi_master.comments, tbl_kpi_master.record_status, tbl_kpi_master.approver_comments, tbl_kpi_master.approval_updated_date, tbl_kpi_master.approval_updated_time from tbl_kpi_master,tbl_team_master,tbl_user_master where  tbl_team_master.team_name=tbl_kpi_master.team_name AND tbl_user_master.team_id = tbl_team_master.team_id and tbl_user_master.emp_id = 7;";
+                $sql_fetch = "SELECT tbl_k.kpi_id,tbl_k.kpi_name, tbl_k.team_name, tbl_k.target_type, tbl_k.target,tbl_k.target_form, tbl_t.team_name, tbl_k.kpi_month, tbl_k.kpi_year, tbl_k.actual, tbl_k.tat_status, tbl_k.root_cause, tbl_k.corrective_action, tbl_k.comments, tbl_k.record_status, tbl_k.approver_comments, tbl_k.approval_updated_date, tbl_k.approval_updated_time from tbl_kpi_master tbl_k,tbl_team_master tbl_t,tbl_user_master tbl_u where  tbl_t.team_name=tbl_k.team_name AND tbl_u.team_id = tbl_t.team_id ;";
                 $result = $con->query($sql_fetch);
                 $result -> fetch_all(MYSQLI_ASSOC);
             //     throw new Exception("Error");
@@ -69,6 +69,7 @@
                     <th>KPI Name</th>
                     <th>Type</th>
                     <th>Target</th>
+                    <th>Target Type</th>
                     <th>Team Name</th>
                     <th>Month</th>
                     <th>Year</th>
@@ -85,16 +86,17 @@
                 <tr>
                 <?php 
                     foreach ($result as $output) {?>
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox" name=checkboxes></td>
                     <td><?php echo $output["kpi_id"];?></td>
                     <td><?php echo $output["kpi_name"];?></td>
                     <td><?php echo $output["target_type"];?></td>
                     <td><?php echo $output["target"];?></td>
+                    <td><?php echo $output["target_form"];?></td>
                     <td><?php echo $output["team_name"];?></td>
                     <td><?php echo $output["kpi_month"];?></td>
                     <td><?php echo $output["kpi_year"];?></td>
-                    <td><input type="number" id="actual_score" name="actual_score" onkeyup="myFunction(this)">
-                </td>                                          
+                    <td><input type="number" class="actual_score" name="actual_score" onkeyup="actualScore(this)" min="0">
+                </td>                                   
                     <!-- <td><input type="text" id="met_not_met" name="met_not_met"><br><br></td> -->
                     <td>
                         <input type="text" id="met-not-met" readonly>
@@ -115,7 +117,7 @@
         </table>
 
         <br><br>
-        <button type="submit" name = "sfa">Send For Approval</button> 
+        <button type="submit" name="sfa">Send For Approval</button> 
         <br>
       </form>
     </div>
@@ -124,6 +126,9 @@
 <script src="//code.jquery.com/jquery-3.5.1.js"></script>
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
+    
+    
+
     $(document).ready(function() {
         $('#master_table').DataTable( {
             "scrollY": 200,
@@ -131,9 +136,7 @@
         } );
     } );
 
-    function myFunction(e){
-        console.log(e)
-    }
+    
 </script>
 </html>
 
