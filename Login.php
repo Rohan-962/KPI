@@ -23,7 +23,7 @@
         
 
         foreach ($result as $output) {
-            $user_type = $output["emp_type"];
+            $user_role = $output["role"];
             $user_id = $output["emp_id"];
         
         echo $user_type;
@@ -42,7 +42,7 @@
             }
         } 
         // Else Redirect to User 
-        elseif ($user_type == "Non-Admin") {
+        elseif ($user_role == "Requestor") {
 
             if ($count == 1) {
 
@@ -50,7 +50,20 @@
                 $_COOKIE['login']  = true;
                 $_COOKIE['user_name'] = $username;
                 $_COOKIE['user_id'] = $user_id;
-                header("Location: Master_kpi_page.php");
+                header("Location: RequestorKPI.php");
+            } else {
+                echo "Record not found";
+            }
+        }
+        elseif ($user_role == "Approver") {
+
+            if ($count == 1) {
+
+                session_start();
+                $_COOKIE['login']  = true;
+                $_COOKIE['user_name'] = $username;
+                $_COOKIE['user_id'] = $user_id;
+                header("Location: ApproverKPI.php");
             } else {
                 echo "Record not found";
             }

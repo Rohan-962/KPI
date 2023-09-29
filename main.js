@@ -48,7 +48,37 @@ function actualScore(e){
     }
     else if(type.innerText == 'RAG')
     {
-        console.log(target.innerHTML)
+        // target = row.children[4];
+        console.log(target)
+        let result = target.split(";")
+        console.log(result[0])
+
+        //First condition
+        temp1 = result[0].indexOf(":")
+        temp2 = result[0].indexOf("-")
+        temp3 = result[0].indexOf(")")
+
+        //Second condition
+        temp4 = result[2].indexOf(":")
+        temp5 = result[2].indexOf("-")
+        temp6 = result[2].indexOf(")");
+
+        first_digit = Number(result[0].substring(temp1 +1,temp2 ))
+        second_last_digit =  Number(result[0].substring(temp2 +1,temp3))
+        last_digit = Number(result[2].substring(temp5 +1,temp6))
+        
+        // console.log(temp1 + 1)
+        // console.log(temp1 + " "  + temp2 + " " + temp3)
+        console.log(first_digit + " " + second_last_digit + " " + last_digit)
+        //(R:0-4)
+        if(v_actual_score <= second_last_digit)
+        {
+            met_notmet.innerHTML = 'Not-Met'
+        }
+        else{
+            met_notmet.innerHTML = 'Met'
+        }
+        
     }
     
 }

@@ -81,21 +81,19 @@
                     <td><?php echo $output["team_name"];?></td>
                     <td><?php echo $output["kpi_month"];?></td>
                     <td><?php echo $output["kpi_year"];?></td>
-                    <td><input type="number" class="actual_score" name="actual_score" onkeyup="actualScore(this)" min="0">
-                </td>                                   
+                    <td><?php echo $output["actual"]; ?></td>                                   
                     <!-- <td><input type="text" id="met_not_met" name="met_not_met"><br><br></td> -->
-                    <td>
-                        <input type="text" id="met-not-met" readonly>
-                    <!-- <select id="met_not_met" name="met_not_met">
-                        <option value = "met" selected>Met</option>
-                        <option value = "not-met">Not-Met</option>
-                    </select> -->
-                    </td>
-                    <td><input type="text" id="root_cause" name="root_cause"></td>                    
-                    <td><input type="text" id="corrective_action" name="corrective_action"></td>
-                    <td><input type="text" id="user_comments" name="user_comments"></td>
+                    <td><?php echo $output["tat_status"]; ?></td>
+                    
+                    <td><?php echo $output["root_cause"]; ?></td>                    
+                    <td><?php echo $output["corrective_action"]; ?></td>
+                    <td><?php echo $output["comments"]; ?></td>
+                    <td><select name="status"">
+                            <option value="">--Select--</option>
+                            <option value="Approve">Approve</option>
+                            <option value="Reject">Reject</option>
+                        </select></td>
                     <td><input type="text" id="approve_comment" name="approve_comment"></td>
-                    <td><input type="text" id="status_1" name="status_1"></td>
 
                 </tr>
                 <?php } ?>

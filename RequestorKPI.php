@@ -26,9 +26,6 @@
 <!-- Fetch KPI's from team Master -->
     <div class="container">
 
-    
-    <form name="masterKpi" action="Master_kpi_page.html" method="get">
-    
     <!-- <input type="text" name="username" value="<?php echo $_SESSION['user_id']; ?> "/> -->
          
         
@@ -64,15 +61,14 @@
                     <th>Root Cause</th>
                     <th>Corrective Action</th>
                     <th>User Comments</th>
-                    <th>Status</th>
-                    <th>Approve Comment</th>
+                    
                 </tr>
             </thead>
             <tbody>
                 <tr>
                 <?php 
                     foreach ($result as $output) {?>
-                    <td><input type="checkbox" name=checkboxes></td>
+                    <td><input type="checkbox" class="checkbox"></td>
                     <td><?php echo $output["kpi_id"];?></td>
                     <td><?php echo $output["kpi_name"];?></td>
                     <td><?php echo $output["target_type"];?></td>
@@ -84,18 +80,11 @@
                     <td><input type="number" class="actual_score" name="actual_score" onkeyup="actualScore(this)" min="0">
                 </td>                                   
                     <!-- <td><input type="text" id="met_not_met" name="met_not_met"><br><br></td> -->
-                    <td>
-                        <input type="text" id="met-not-met" readonly>
-                    <!-- <select id="met_not_met" name="met_not_met">
-                        <option value = "met" selected>Met</option>
-                        <option value = "not-met">Not-Met</option>
-                    </select> -->
-                    </td>
-                    <td><input type="text" id="root_cause" name="root_cause"></td>                    
-                    <td><input type="text" id="corrective_action" name="corrective_action"></td>
-                    <td><input type="text" id="user_comments" name="user_comments"></td>
-                    <td><input type="text" id="approve_comment" name="approve_comment"></td>
-                    <td><input type="text" id="status_1" name="status_1"></td>
+                    <td><input type="text" class="met-not-met" id="met-not-met" readonly></td>
+                    <td><input type="text" class="root_cause" id="root_cause" name="root_cause"></td>                    
+                    <td><input type="text" class="corrective_action" id="corrective_action" name="corrective_action"></td>
+                    <td><input type="text" class="user_comments" id="user_comments" name="user_comments"></td>
+                    
 
                 </tr>
                 <?php } ?>
@@ -103,9 +92,9 @@
         </table>
 
         <br><br>
-        <button type="submit" name="sfa">Send For Approval</button> 
+        <button id="sfa">Send For Approval</button> 
         <br>
-      </form>
+      
     </div>
 </body>
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
@@ -113,15 +102,48 @@
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
     
-    
-
     $(document).ready(function() {
         $('#master_table').DataTable( {
             "scrollY": 200,
             "scrollX": true
         } );
     } );
+    
+    var checkboxes = document.querySelectorAll('.checkbox')
+    var actual_scores = document.querySelectorAll('.actual_score');
+    var met_not_mets = document.querySelectorAll('met-not-met')
+    var root_causes = document.querySelectorAll('root_cause')
+    var corrective_actions = document.querySelectorAll('corrective_action')
+    var user_comments = document.querySelectorAll('user_comments')
 
+    checkboxes.forEach(function(checkbox,index){
+        checkbox.addEventListener('change',function(){
+            if(this.checked){
+                var row = this.closest('tr');
+
+
+                var actual_score = actual_scores[index].value
+                var met_not_met = met_not_mets[index].value
+
+                console.log(actual_score)
+                console.log(row)
+                console.log(row.cells[9].innerText)
+                let value10 = row.cells[10].InnerHTML
+                console.log(value10)
+                console.log(row.cells[11].value)
+                console.log(row.cells[12].value)
+                console.log(row.cells[13].value)
+            }
+
+        })
+    })
+
+    document.getElementById('sfa').addEventListener('click',myfunction)
+    
+    function myfunction()
+    {
+       
+    }   
     
 </script>
 </html>
