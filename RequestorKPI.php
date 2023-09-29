@@ -92,7 +92,7 @@
         </table>
 
         <br><br>
-        <button id="sfa">Send For Approval</button> 
+        <button id="sfa" onclick="submitForm()">Send For Approval</button> 
         <br>
       
     </div>
@@ -120,31 +120,23 @@
         checkbox.addEventListener('change',function(){
             if(this.checked){
                 var row = this.closest('tr');
-
-
+                
                 var actual_score = actual_scores[index].value
-                var met_not_met = met_not_mets[index].value
+                var met_not_met = met_not_mets[index]
+                var root_cause = root_causes[index].value
+                var corrective_action = corrective_actions[index].value
+                var user_comment = user_comments[index].value
 
-                console.log(actual_score)
-                console.log(row)
-                console.log(row.cells[9].innerText)
-                let value10 = row.cells[10].InnerHTML
-                console.log(value10)
-                console.log(row.cells[11].value)
-                console.log(row.cells[12].value)
-                console.log(row.cells[13].value)
+                console.log(actual_score + " " + met_not_met + " " + root_cause + " " + corrective_action + " " + user_comment)
+                
             }
 
         })
     })
 
-    document.getElementById('sfa').addEventListener('click',myfunction)
-    
-    function myfunction()
-    {
-       
-    }   
-    
+    function submitForm(){
+
+    }
 </script>
 </html>
 
